@@ -6,6 +6,9 @@ const features = {
     hair: null
 };
 
+let currentStream;      // 현재 활성화된 비디오 스트림
+let cameraFacing = "user"; // 초기 전면 카메라 설정
+
 function setFeature(category, option) {
     features[category] = option;
     updateAvatar();
@@ -36,11 +39,30 @@ function saveAvatar() {
     link.click();
 }
 
-// 카메라 기능 시작
+// 카메라 시작
 async function startCamera() {
     const video = document.getElementById('camera');
-    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-    video.srcObject = stream;
+    const constraints = {
+        video: {
+            facingMode: cameraFacing   // 전면 또는 후면 설정
+        }
+    };
+    currentStream = await navigator.mediaDevices.getUserMedia(constraints);
+    video.srcObject = currentStream;
+}
+
+// 카메라 전환
+async function toggleCamera() {
+    cameraFacing = cameraFacing === "user" ? "environment" : "user";
+
+    // 기존 스트림을 정지
+    if (currentStream) {
+        const tracks = currentStream.getTracks();
+        tracks.forEach(track => track.stop());
+    }
+
+    // 새 카메라 모드로 다시 시작
+    await startCamera();
 }
 
 // 사진 찍기
@@ -55,7 +77,7 @@ function capturePhoto() {
     // 아바타 오버레이
     photoCtx.drawImage(avatarCanvas, 0, 0, photoCanvas.width, photoCanvas.height);
 
-    // 저장 기능
+    // 사진 저장
     const image = photoCanvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
     const link = document.createElement('a');
     link.href = image;
