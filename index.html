@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>아바타 메이커</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>아바타 메이커</h1>
+
+    <!-- 아바타 커스터마이징 영역 -->
+    <div id="avatar-maker">
+        <canvas id="avatar-canvas" width="300" height="300"></canvas>
+        <div id="avatar-options">
+            <h2>카테고리 선택</h2>
+            <div class="option-category">
+                <p>눈 모양:</p>
+                <button onclick="setFeature('eyes', 1)">눈 1</button>
+                <button onclick="setFeature('eyes', 2)">눈 2</button>
+            </div>
+            <div class="option-category">
+                <p>머리 스타일:</p>
+                <button onclick="setFeature('hair', 1)">머리 1</button>
+                <button onclick="setFeature('hair', 2)">머리 2</button>
+            </div>
+            <!-- 나머지 카테고리 추가 -->
+        </div>
+        <button onclick="saveAvatar()">아바타 저장</button>
+    </div>
+
+    <!-- 카메라 및 사진 촬영 영역 -->
+    <div id="camera-section">
+        <video id="camera" autoplay></video>
+        <canvas id="photo-canvas" width="300" height="300"></canvas>
+        <button onclick="capturePhoto()">사진 찍기</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
