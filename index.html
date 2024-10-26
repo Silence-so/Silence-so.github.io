@@ -9,30 +9,27 @@
 <body>
     <h1>아바타 메이커</h1>
 
-    <!-- 아바타 커스터마이징 영역 -->
+    <!-- 아바타 메이커 영역 -->
     <div id="avatar-maker">
-        <canvas id="avatar-canvas" width="300" height="300"></canvas>
+        <canvas id="avatar-canvas" width="685" height="1068"></canvas>
         <div id="avatar-options">
-            <h2>카테고리 선택</h2>
-            <div class="option-category">
-                <p>눈 모양:</p>
-                <button onclick="setFeature('eyes', 1)">눈 1</button>
-                <button onclick="setFeature('eyes', 2)">눈 2</button>
-            </div>
-            <div class="option-category">
-                <p>머리 스타일:</p>
-                <button onclick="setFeature('hair', 1)">머리 1</button>
-                <button onclick="setFeature('hair', 2)">머리 2</button>
-            </div>
-            <!-- 나머지 카테고리 추가 -->
+            <button onclick="showOptions('eyes')">눈 모양</button>
+            <button onclick="showOptions('eyebrows')">눈썹 모양</button>
+            <button onclick="showOptions('makeup')">화장</button>
+            <button onclick="showOptions('clothes')">옷</button>
+            <button onclick="showOptions('hair')">머리 스타일</button>
+            <button onclick="showOptions('accessory')">악세사리</button>
+            <button onclick="showOptions('glasses')">안경</button>
+            <button onclick="resetAvatar()">리셋</button>
         </div>
+        <div id="option-panel" class="hidden"></div>
         <button onclick="saveAvatar()">아바타 저장</button>
     </div>
 
     <!-- 카메라 및 사진 촬영 영역 -->
     <div id="camera-section">
         <video id="camera" autoplay></video>
-        <canvas id="photo-canvas" width="300" height="300"></canvas>
+        <canvas id="photo-canvas" width="685" height="1068"></canvas>
         <button onclick="capturePhoto()">사진 찍기</button>
     </div>
 
